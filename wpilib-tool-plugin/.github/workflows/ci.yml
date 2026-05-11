@@ -1,0 +1,67 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-java@v5
+      with:
+        java-version: 17
+        distribution: 'temurin'
+    - name: Check for changes
+      run: ./gradlew spotlessCheck
+
+  build:
+    strategy:
+      matrix:
+         os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-java@v5
+      with:
+        java-version: 17
+        distribution: 'temurin'
+    - name: Build
+      run: ./gradlew build -PRunToolchainTests
+    - name: Publish
+      run: ./gradlew publishToMavenLocal
+    - name: Check output
+      run: git --no-pager diff --exit-code HEAD
+
+  test:
+    strategy:
+      matrix:
+         arch: ["winx86-64", "winarm64", "linuxarm32", "linuxarm64", "linuxx86-64", "macx86-64", "macarm64"]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - uses: actions/setup-java@v5
+      with:
+        java-version: 17
+        distribution: 'temurin'
+    - name: Publish to maven local
+      run: ./gradlew publishToMavenLocal
+    - name: Test project
+      run: cd test_proj && ../gradlew build -PArchOverride=${{ matrix.arch }}
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: Publish to Maven Local
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: ./gradlew publishToMavenLocal
+      - name: Publish to PhotonVision Maven
+        if: ${{ github.repository_owner == 'photonvision' && startsWith(github.ref, 'refs/tags/v') }}
+        env:
+          ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
+        run: ./gradlew publish -x publishPluginMavenPublicationToMavenLocal

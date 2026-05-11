@@ -1,0 +1,143 @@
+import org.gradle.internal.os.OperatingSystem;
+
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id "com.gradle.plugin-publish" version "2.0.0"
+    id "com.diffplug.spotless" version "8.1.0"
+}
+
+group 'org.photonvision'
+version '4.1.1-photon'
+
+if (project.hasProperty('publishVersion')) {
+    version = project.publishVersion
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.13.2'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+gradlePlugin {
+    website = 'https://github.com/photonvision/wpilib-tool-plugin'
+    vcsUrl = 'https://github.com/photonvision/wpilib-tool-plugin'
+
+    plugins {
+        WpilibTools {
+            id = 'org.photonvision.tools.WpilibTools'
+            implementationClass = 'org.photonvision.tools.WpilibTools'
+            displayName = 'WPILib Gradle Tool Plugin'
+            description = 'This plugin provides easy to use JNI support for gradle.'
+            tags = [
+                'groovy',
+                'jni',
+                'utils',
+                'maven',
+                'frc',
+                'wpilib',
+                'photonvision'
+            ]
+        }
+    }
+}
+
+tasks.withType(Javadoc) {
+    options.addBooleanOption('Xdoclint:all,-missing', true)
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked'
+    options.deprecation = true
+}
+
+tasks.named('pluginUnderTestMetadata') {
+    pluginClasspath.from(tasks.named('jar'))
+    dependsOn(tasks.named('jar'))
+}
+
+wrapper {
+    gradleVersion = '9.4.0'
+}
+
+spotless {
+    java {
+        target fileTree('.') {
+            include '**/*.java'
+            exclude '**/build/**', '**/build-*/**', '**/src/generated/**'
+        }
+        toggleOffOn()
+        googleJavaFormat()
+        leadingSpacesToTabs(2)
+        leadingTabsToSpaces(4)
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    groovyGradle {
+        target fileTree('.') {
+            include '**/*.gradle'
+            exclude '**/build/**', '**/build-*/**'
+        }
+        greclipse()
+        leadingTabsToSpaces(4)
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+    format 'misc', {
+        target fileTree('.') {
+            include '**/*.md', '**/.gitignore'
+            exclude '**/build/**', '**/build-*/**', '**/node_modules/**'
+        }
+        trimTrailingWhitespace()
+        leadingTabsToSpaces(2)
+        endWithNewline()
+    }
+}
+
+publishing {
+    publications {
+        // Main plugin artifact
+        maven(MavenPublication) {
+            groupId = project.group
+            artifactId = project.name
+            version = project.version
+            from components.java
+        }
+
+        // Plugin marker artifact
+        pluginMarker(MavenPublication) {
+            groupId = 'org.photonvision.tools.WpilibTools'
+            artifactId = 'org.photonvision.tools.WpilibTools.gradle.plugin'
+            version = project.version
+
+            pom {
+                name = 'WPILib Tools Plugin'
+                description = 'This plugin provides easy to use JNI support for gradle.'
+
+                // Define the dependency on the main plugin artifact
+                dependencies {
+                    implementation "${project.group}:${project.name}:${project.version}"
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = "PhotonVision"
+            url = "https://maven.photonvision.org/releases"
+            credentials {
+                username = "ghactions"
+                password = System.getenv("ARTIFACTORY_API_KEY")
+            }
+        }
+    }
+}
