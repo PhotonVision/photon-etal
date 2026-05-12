@@ -1,7 +1,7 @@
 name: Lint and Format
 
 on:
-  # Run on pushes to main and pushed tags, and on pull requests against main
+  # Run on pushes to main and on pull requests against main
   push:
   pull_request:
 
@@ -12,7 +12,7 @@ concurrency:
 jobs:
   wpiformat:
     name: "wpiformat"
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - name: Fetch all history and metadata
@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: 3.14
       - name: Install wpiformat
-        run: pip3 install wpiformat==2025.79
+        run: pip3 install wpiformat==2026.61
       - name: Run
         run: wpiformat
       - name: Check output
@@ -39,8 +39,8 @@ jobs:
       - name: Generate diff
         run: git diff HEAD > wpiformat-fixes.patch
         if: ${{ failure() }}
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
-          name: wpiformat fixes
+          archive: false
           path: wpiformat-fixes.patch
         if: ${{ failure() }}
