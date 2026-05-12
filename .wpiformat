@@ -1,0 +1,33 @@
+cppHeaderFileInclude {
+  \.h$
+  \.hpp$
+  \.inc$
+  \.inl$
+}
+
+modifiableFileExclude {
+  mrcal-java/mrcal
+  mrcal-java/libdogleg
+  mrcal-java/vnlog
+  mrcal-java/gradle
+  rknn-jni/src/main/native/include/3rdparty*
+}
+
+cppSrcFileInclude {
+  \.cpp$
+}
+
+includeProject {
+  ^photonLib/
+}
+
+includeOtherLibs {
+  ^frc/
+  ^networktables/
+  ^units/
+  ^wpi/
+}
+
+licenseUpdateExclude {
+  wpilib-tool-plugin/
+}
