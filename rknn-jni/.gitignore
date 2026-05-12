@@ -1,7 +1,0 @@
-build
-rknpu2
-cmake_build
-.gradle
-bin
-*.onnx
-*.jar

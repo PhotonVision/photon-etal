@@ -1,0 +1,61 @@
+# IDE & Editor
+.vscode
+.project
+.settings
+.classpath
+
+# Build system
+.gradle
+build/
+bin/
+cmake_build
+compile_commands.json
+
+# Build artifacts
+vcpkg_installed
+rknpu2
+
+# Package & model files
+*.jar
+*.onnx
+
+# Development environment
+*.nix
+shell.nix
+.venv
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Specific generated files
+tflite-jni/src/test/resources/images/bus_with_results.jpg
