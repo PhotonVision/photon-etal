@@ -28,7 +28,6 @@ public class ExtractConfiguration extends DefaultTask {
     private final ArtifactViewAction viewAction = new ArtifactViewAction();
 
     private class AttributeContainerAction implements Action<AttributeContainer> {
-
         @Override
         public void execute(AttributeContainer attribute) {
             attribute.attribute(
@@ -92,7 +91,6 @@ public class ExtractConfiguration extends DefaultTask {
 
     @TaskAction
     public void execute() throws IOException {
-
         getProject()
                 .sync(
                         spec -> {

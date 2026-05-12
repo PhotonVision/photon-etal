@@ -15,8 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_RGA_FUNC_H_
-#define RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_RGA_FUNC_H_
+#pragma once
 
 #include <dlfcn.h>
 
@@ -50,4 +49,3 @@ int RGA_deinit(rga_context *rga_ctx);
 #ifdef __cplusplus
 } // extern "C"
 #endif
-#endif // RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_RGA_FUNC_H_

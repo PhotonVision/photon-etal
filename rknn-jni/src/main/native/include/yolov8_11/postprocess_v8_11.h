@@ -15,8 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_YOLOV8_11_POSTPROCESS_V8_11_H_
-#define RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_YOLOV8_11_POSTPROCESS_V8_11_H_
+#pragma once
 
 #include <stdint.h>
 
@@ -43,5 +42,3 @@ int post_process_v8_11(cv::Size modelSize, rknn_output *outputs,
                        int numClasses,
                        std::vector<rknn_tensor_attr> &output_attrs,
                        bool is_quant, int n_outputs);
-
-#endif // RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_YOLOV8_11_POSTPROCESS_V8_11_H_

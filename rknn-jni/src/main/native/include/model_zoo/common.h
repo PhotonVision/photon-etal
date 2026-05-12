@@ -15,8 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_MODEL_ZOO_COMMON_H_
-#define RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_MODEL_ZOO_COMMON_H_
+#pragma once
 
 /**
  * @brief Image pixel format
@@ -55,5 +54,3 @@ typedef struct {
   int right;
   int bottom;
 } image_rect_t;
-
-#endif // RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_MODEL_ZOO_COMMON_H_

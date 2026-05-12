@@ -15,8 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_YOLOV5_POSTPROCESS_V5_H_
-#define RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_YOLOV5_POSTPROCESS_V5_H_
+#pragma once
 
 #include <stdint.h>
 
@@ -54,5 +53,3 @@ int post_process_v5(int8_t *input0, int8_t *input1, int8_t *input2,
                     float scale_h, std::vector<int32_t> &qnt_zps,
                     std::vector<float> &qnt_scales,
                     detect_result_group_t *group, int numClasses);
-
-#endif // RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_YOLOV5_POSTPROCESS_V5_H_

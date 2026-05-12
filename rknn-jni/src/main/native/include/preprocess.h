@@ -15,8 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_PREPROCESS_H_
-#define RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_PREPROCESS_H_
+#pragma once
 
 #include <cstdio>
 
@@ -33,4 +32,4 @@ void letterbox(const cv::Mat &image, cv::Mat &padded_image, BOX_RECT &pads,
 int resize_rga(rga_buffer_t &src, rga_buffer_t &dst, const cv::Mat &image,
                cv::Mat &resized_image, const cv::Size &target_size);
 
-#endif // RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_PREPROCESS_H_
+#endif // PHOTON_ETAL_RKNN_JNI_SRC_MAIN_NATIVE_INCLUDE_PREPROCESS_H_

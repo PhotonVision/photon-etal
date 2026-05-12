@@ -45,7 +45,6 @@ public class FixupNativeResources extends DefaultTask {
         getProject()
                 .sync(
                         new Action<SyncSpec>() {
-
                             @Override
                             public void execute(SyncSpec copySpec) {
                                 copySpec.from(inputDirectory);

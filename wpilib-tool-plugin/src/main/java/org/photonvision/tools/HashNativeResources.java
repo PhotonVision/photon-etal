@@ -28,7 +28,6 @@ import org.gradle.api.tasks.OutputFile;
 import org.gradle.api.tasks.TaskAction;
 
 public class HashNativeResources extends DefaultTask {
-
     /**
      * Architecture-specific information containing file hashes for a specific CPU architecture (e.g.,
      * x86-64, arm64).

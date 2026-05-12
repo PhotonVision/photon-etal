@@ -21,7 +21,6 @@ import org.gradle.internal.UncheckedException;
  * name minus the extension.
  */
 public interface UnzipTransform extends TransformAction<TransformParameters.None> {
-
     // TODO see if we can get incremental to work
 
     @InputArtifact

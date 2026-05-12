@@ -16,12 +16,12 @@
  */
 
 /* DO NOT EDIT THIS std::FILE - it is machine generated */
+#pragma once
+
 #include <jni.h>
 
 /* Header for class MrCalJNI */
 
-#ifndef MRCAL_JAVA_SRC_MRCAL_JNI_H_
-#define MRCAL_JAVA_SRC_MRCAL_JNI_H_
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -57,4 +57,3 @@ Java_org_photonvision_mrcal_MrCalJNI_compute_1uncertainty(
 #ifdef __cplusplus
 } // extern "C"
 #endif
-#endif // MRCAL_JAVA_SRC_MRCAL_JNI_H_

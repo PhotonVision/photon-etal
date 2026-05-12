@@ -16,12 +16,11 @@
  */
 
 /* DO NOT EDIT THIS std::FILE - it is machine generated */
+#pragma once
+
 #include <jni.h>
 
 /* Header for class org_photonvision_rknn_RknnJNI */
-
-#ifndef RKNN_JNI_SRC_MAIN_NATIVE_CPP_RKNN_JNI_H_
-#define RKNN_JNI_SRC_MAIN_NATIVE_CPP_RKNN_JNI_H_
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -68,4 +67,3 @@ Java_org_photonvision_rknn_RknnJNI_isQuantized(JNIEnv *, jclass, jlong);
 #ifdef __cplusplus
 } // extern "C"
 #endif
-#endif // RKNN_JNI_SRC_MAIN_NATIVE_CPP_RKNN_JNI_H_

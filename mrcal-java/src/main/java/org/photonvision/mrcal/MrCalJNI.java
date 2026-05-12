@@ -320,7 +320,6 @@ public class MrCalJNI {
             int imageWidth,
             int imageHeight,
             double focalLen) {
-
         if (!(board_corners.size() == board_corner_levels.size())) {
             return new MrCalResult(false);
         }
